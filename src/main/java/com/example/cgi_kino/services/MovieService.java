@@ -1,41 +1,19 @@
 package com.example.cgi_kino.services;
 
-import com.example.cgi_kino.models.Movie;
-import com.example.cgi_kino.repositories.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.example.cgi_kino.dto.MovieDto;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class MovieService {
+public interface MovieService {
 
-    @Autowired
-    private MovieRepository movieRepository;
+    MovieDto addMovie(MovieDto movieDto);
 
-    public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
-    }
+    MovieDto getMovie(Long id);
 
-    public Movie getMovieById(int id) {
-        Optional<Movie> optionalMovie = movieRepository.findById(id);
-        return optionalMovie.orElse(null);
-    }
+    List<MovieDto> getAllMovies();
 
-    public Movie addMovie(Movie movie) {
-        return movieRepository.save(movie);
-    }
+    MovieDto updateMovie(MovieDto movieDto, Long id);
 
-    public Movie updateMovieById(int id, Movie movie) {
-        if (movieRepository.existsById(id)) {
-            movie.setId(id);
-            return movieRepository.save(movie);
-        }
-        return null;
-    }
+    void deleteMovie(Long id);
 
-    public void deleteMovieById(int id) {
-        movieRepository.deleteById(id);
-    }
 }
