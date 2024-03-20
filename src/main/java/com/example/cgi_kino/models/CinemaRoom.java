@@ -1,17 +1,23 @@
 package com.example.cgi_kino.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+import java.util.List;
 
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+//@Table(name = "seats")
 public class CinemaRoom {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+    private String title;
 
-    private String name;
+    @OneToMany(mappedBy = "cinemaRoom", cascade = CascadeType.ALL)
+    private List<Seat> seats;
 
 }
