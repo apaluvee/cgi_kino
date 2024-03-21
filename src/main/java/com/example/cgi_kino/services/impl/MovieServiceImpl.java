@@ -1,8 +1,10 @@
 package com.example.cgi_kino.services.impl;
 
+import com.example.cgi_kino.dto.CinemaRoomDto;
 import com.example.cgi_kino.dto.MovieDto;
 import com.example.cgi_kino.models.Movie;
 import com.example.cgi_kino.repositories.MovieRepository;
+import com.example.cgi_kino.services.CinemaRoomService;
 import com.example.cgi_kino.services.MovieService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -16,7 +18,7 @@ import java.util.stream.Collectors;
 public class MovieServiceImpl implements MovieService {
 
     private MovieRepository movieRepository;
-
+    private CinemaRoomService cinemaRoomService;
     private ModelMapper modelMapper;
 
     @Override
@@ -24,6 +26,11 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = modelMapper.map(movieDto, Movie.class);
 
         Movie savedMovie = movieRepository.save(movie);
+
+        CinemaRoomDto cinemaRoomDto = new CinemaRoomDto();
+        cinemaRoomDto.setTitle(movie.getTitle() + " Cinema Room");
+
+        CinemaRoomDto savedCinemaRoom = cinemaRoomService.addCinemaRoom(cinemaRoomDto);
 
         return modelMapper.map(savedMovie, MovieDto.class);
     }

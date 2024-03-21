@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,11 +28,23 @@ public class CinemaRoomServiceImpl implements CinemaRoomService {
 
         CinemaRoom cinemaRoom = modelMapper.map(cinemaRoomDto, CinemaRoom.class);
 
+        List<Seat> cinemaRoomSeats = new ArrayList<>();
+        for (int row = 1; row <= 8; row++) {
+            for (int seatNumber = 1; seatNumber <= 15; seatNumber++) {
+                Seat seat = new Seat();
+                seat.setRow(row);
+                seat.setNumber(seatNumber);
+                seat.setTaken(false);
+                seat.setCinemaRoom(cinemaRoom);
+                cinemaRoomSeats.add(seat);
+            }
+        }
+
+        cinemaRoom.setSeats(cinemaRoomSeats);
+
         CinemaRoom savedCinemaRoom = cinemaRoomRepository.save(cinemaRoom);
 
-        CinemaRoomDto savedCinemaRoomDto = modelMapper.map(savedCinemaRoom, CinemaRoomDto.class);
-
-        return savedCinemaRoomDto;
+        return modelMapper.map(savedCinemaRoom, CinemaRoomDto.class);
     }
 
     @Override
@@ -121,6 +134,24 @@ public class CinemaRoomServiceImpl implements CinemaRoomService {
         CinemaRoom updatedCinemaRoom = cinemaRoomRepository.save(cinemaRoom);
 
         return modelMapper.map(updatedCinemaRoom, CinemaRoomDto.class);
+    }
+
+    @Override
+    public SeatDto getSeatByRowAndNumber(Long roomId, int row, int seatNumber) {
+        CinemaRoom cinemaRoom = cinemaRoomRepository.findById(Math.toIntExact(roomId))
+                .orElseThrow(() -> new RuntimeException("Cinema room not found: " + roomId));
+
+        List<Seat> seats = cinemaRoom.getSeats();
+
+        Optional<Seat> optionalSeat = seats.stream()
+                .filter(seat -> seat.getRow() == row && seat.getNumber() == seatNumber)
+                .findFirst();
+
+        if (optionalSeat.isPresent()) {
+            return modelMapper.map(optionalSeat.get(), SeatDto.class);
+        } else {
+            return null;
+        }
     }
 
 }
