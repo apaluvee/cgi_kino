@@ -13,6 +13,8 @@ public class Movie {
     private String title;
     private String language;
     private String ageRating;
+    private boolean taken;
+
 
     /*@ElementCollection
     @CollectionTable(name = "genres")

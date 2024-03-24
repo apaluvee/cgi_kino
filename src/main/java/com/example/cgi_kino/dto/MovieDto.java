@@ -14,5 +14,6 @@ public class MovieDto {
     private String title;
     private String language;
     private int ageRating;
+    private boolean taken;
 
 }

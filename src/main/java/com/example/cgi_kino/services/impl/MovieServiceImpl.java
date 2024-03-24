@@ -75,4 +75,16 @@ public class MovieServiceImpl implements MovieService {
         movieRepository.deleteById(Math.toIntExact(id));
     }
 
+    @Override
+    public MovieDto takeSeat(Long id) {
+        Movie movie = movieRepository.findById(Math.toIntExact(id))
+                .orElseThrow(() -> new RuntimeException("Not found: " + id));
+
+        movie.setTaken(Boolean.TRUE);
+
+        Movie updatedSeat = movieRepository.save(movie);
+
+        return modelMapper.map(updatedSeat, MovieDto.class);
+    }
+
 }
