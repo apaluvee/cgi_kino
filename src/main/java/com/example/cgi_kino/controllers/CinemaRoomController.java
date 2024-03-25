@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/cinema-room")
 @AllArgsConstructor
@@ -55,9 +56,9 @@ public class CinemaRoomController {
     }
 
     @PatchMapping("{id}/seats")
-    public ResponseEntity<CinemaRoomDto> markSeatsAsTaken(@PathVariable("id") Long cinemaRoomId, @RequestBody List<Long> seatIds) {
-        CinemaRoomDto updatedCinemaRoom = cinemaRoomService.markSeatsAsTaken(cinemaRoomId, seatIds);
-        return ResponseEntity.ok(updatedCinemaRoom);
+    public ResponseEntity<Void> markSeatsAsTaken(@PathVariable("id") Long cinemaRoomId, @RequestBody List<Long> seatIds) {
+        cinemaRoomService.markSeatsAsTaken(cinemaRoomId, seatIds);
+        return ResponseEntity.noContent().build();
     }
 
 
