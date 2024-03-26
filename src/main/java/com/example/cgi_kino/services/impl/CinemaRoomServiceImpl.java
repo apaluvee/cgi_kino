@@ -154,4 +154,18 @@ public class CinemaRoomServiceImpl implements CinemaRoomService {
         }
     }
 
+    @Override
+    public int countFreeSeats(Long id) {
+        CinemaRoom cinemaRoom = cinemaRoomRepository.findById(Math.toIntExact(id))
+                .orElseThrow(() -> new RuntimeException("Cinema room not found: " + id));
+
+        int count = 0;
+        for (Seat seat : cinemaRoom.getSeats()) {
+            if (!seat.isTaken()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 }

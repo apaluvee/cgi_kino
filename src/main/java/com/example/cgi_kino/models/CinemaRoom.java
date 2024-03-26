@@ -10,7 +10,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-//@Table(name = "seats")
 public class CinemaRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

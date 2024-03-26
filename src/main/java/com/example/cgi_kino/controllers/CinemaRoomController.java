@@ -61,6 +61,12 @@ public class CinemaRoomController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("{id}/seats/count")
+    public ResponseEntity<Integer> countFreeSeats(@PathVariable("id") Long cinemaRoomId) {
+        int freeSeatCount = cinemaRoomService.countFreeSeats(cinemaRoomId);
+        return ResponseEntity.ok(freeSeatCount);
+    }
+
 
 
 }

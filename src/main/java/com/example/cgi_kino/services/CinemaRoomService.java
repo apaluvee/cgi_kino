@@ -23,4 +23,6 @@ public interface CinemaRoomService {
 
     SeatDto getSeatByRowAndNumber(Long roomId, int row, int seatNumber);
 
+    int countFreeSeats(Long id);
+
 }
