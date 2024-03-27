@@ -28,7 +28,7 @@ public class MovieServiceImpl implements MovieService {
         Movie savedMovie = movieRepository.save(movie);
 
         CinemaRoomDto cinemaRoomDto = new CinemaRoomDto();
-        cinemaRoomDto.setTitle(movie.getTitle() + " Cinema Room");
+        cinemaRoomDto.setTitle(movie.getTitle());
 
         CinemaRoomDto savedCinemaRoom = cinemaRoomService.addCinemaRoom(cinemaRoomDto);
 
