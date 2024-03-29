@@ -29,6 +29,10 @@ public class MovieServiceImpl implements MovieService {
 
         CinemaRoomDto cinemaRoomDto = new CinemaRoomDto();
         cinemaRoomDto.setTitle(movie.getTitle());
+        cinemaRoomDto.setGenre(movie.getGenre());
+        cinemaRoomDto.setAgeRating(movie.getAgeRating());
+        cinemaRoomDto.setStartTime(movie.getStartTime());
+        cinemaRoomDto.setLanguage(movie.getLanguage());
 
         CinemaRoomDto savedCinemaRoom = cinemaRoomService.addCinemaRoom(cinemaRoomDto);
 
@@ -75,16 +79,14 @@ public class MovieServiceImpl implements MovieService {
         movieRepository.deleteById(Math.toIntExact(id));
     }
 
-    @Override
+    /*@Override
     public MovieDto takeSeat(Long id) {
         Movie movie = movieRepository.findById(Math.toIntExact(id))
                 .orElseThrow(() -> new RuntimeException("Not found: " + id));
 
-        movie.setTaken(Boolean.TRUE);
-
         Movie updatedSeat = movieRepository.save(movie);
 
         return modelMapper.map(updatedSeat, MovieDto.class);
-    }
+    }*/
 
 }

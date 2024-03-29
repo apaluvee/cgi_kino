@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -12,8 +14,9 @@ import lombok.Setter;
 public class MovieDto {
     private int id;
     private String title;
+    private String genre;
+    private String ageRating;
+    private LocalDateTime startTime;
     private String language;
-    private int ageRating;
-    private boolean taken;
 
 }

@@ -49,10 +49,10 @@ public class MovieController {
         return ResponseEntity.ok("Movie deleted!");
     }
 
-    @PatchMapping("{id}/taken")
+    /*@PatchMapping("{id}/taken")
     public ResponseEntity<MovieDto> takeSeat(@PathVariable("id") Long movieId) {
         MovieDto updatedMovie = movieService.takeSeat(movieId);
         return ResponseEntity.ok(updatedMovie);
-    }
+    }*/
 
 }

@@ -3,6 +3,8 @@ package com.example.cgi_kino.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 public class Movie {
@@ -11,9 +13,11 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-    private String language;
+    private String genre;
     private String ageRating;
-    private boolean taken;
+    private LocalDateTime startTime;
+    private String language;
+
 
 
     /*@ElementCollection

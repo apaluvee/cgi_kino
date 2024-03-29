@@ -16,6 +16,6 @@ public interface MovieService {
 
     void deleteMovie(Long id);
 
-    MovieDto takeSeat(Long id);
+    //MovieDto takeSeat(Long id);
 
 }
